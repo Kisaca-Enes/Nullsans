@@ -143,7 +143,7 @@ setTimeout(() => {
 // Güncelleme
 function update() {
   if (soul.hp <= 0) {
-    alert("You died... Try again?");
+    alert("Until the end of your determination");
     location.reload();
   }
 
