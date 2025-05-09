@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Video Sayfası</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    #myVideo {
+      display: none;
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    #startBtn {
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: white;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #startBtn:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <button id="startBtn">Videoyu Başlat</button>
+  <video id="myVideo">
+    <source src="video.mp4" type="video/mp4">
+    Tarayıcınız video etiketini desteklemiyor.
+  </video>
+
+  <script>
+    const startBtn = document.getElementById('startBtn');
+    const video = document.getElementById('myVideo');
+
+    startBtn.addEventListener('click', () => {
+      startBtn.style.display = 'none';
+      video.style.display = 'block';
+      video.volume = 1.0; // Ses seviyesi %100
+      video.play();
+
+      video.addEventListener('ended', () => {
+        window.location.href = 'index.html';
+      });
+    });
+  </script>
+</body>
+</html>
