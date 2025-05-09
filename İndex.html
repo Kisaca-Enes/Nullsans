@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sans Fight</title>
+  <link rel="stylesheet" href="badtime.css">
+</head>
+<body style="background-color: black; color: white;">
+
+  <!-- Başla Ekranı -->
+  <div id="startScreen" style="position:fixed;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;z-index:999;background:black;">
+    <button id="startBtn" style="padding:20px 40px;font-size:24px;cursor:pointer;">▶ Başla</button>
+  </div>
+
+  <!-- Oyun Alanı -->
+  <canvas id="gameCanvas" width="640" height="480" style="display:none;"></canvas>
+  <div id="sans" style="display:none;"></div>
+  <div class="dialogue-box" id="dialogue" style="display:none;">
+    you're gonna have a bad time.
+  </div>
+
+  <!-- Müzik -->
+  <audio id="bgMusic" src="badtime.mp3" loop preload="auto"></audio>
+
+  <script>
+    document.getElementById("startBtn").addEventListener("click", async () => {
+      // Start ekranını gizle
+      document.getElementById("startScreen").style.display = "none";
+
+      // Oyun elemanlarını göster
+      document.getElementById("gameCanvas").style.display = "block";
+      document.getElementById("sans").style.display = "block";
+      document.getElementById("dialogue").style.display = "block";
+
+      // Müziği başlat
+      const music = document.getElementById("bgMusic");
+      try {
+        await music.play();
+      } catch (e) {
+        console.error("Müzik başlatılamadı:", e);
+      }
+
+      // Oyun scriptini yükle
+      const script = document.createElement('script');
+      script.src = 'figth.js';
+      document.body.appendChild(script);
+    });
+  </script>
+</body>
+</html>
