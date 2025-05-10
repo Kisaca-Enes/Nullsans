@@ -21,23 +21,23 @@ let bones = [];
 let lasers = [];
 
 const dialogues = [
-  "Try forever",
-  "the judgment you understand. I don't have any in mind.",
+  "Keep trying forever.",
+  "The judgment you understand doesn't exist in my mind.",
   "You think it's finally over?",
-  "You woke up in your eternal hell",
+  "You've awakened in your eternal hell.",
   "In the end, you killed everyone.",
-  "you can't win in this cycle",
-  "Our battle is in this endless cycle",
-  "Until your determination ends",
+  "You can't win in this cycle.",
+  "Our battle repeats in this endless loop.",
+  "Until your determination fades.",
   "You'll be shattered.",
-  "I am made of determination",
-  "determination",
-  "determination",
-  "and stronger than you",
-  "determination",
-  "determination",
-  "determination",
-  "and stronger than you"
+  "I am made of determination.",
+  "Determination.",
+  "Determination.",
+  "And I'm stronger than you.",
+  "Determination.",
+  "Determination.",
+  "Determination.",
+  "And I'm stronger than you."
   
 ];
 
@@ -57,13 +57,16 @@ function updateHeartType() {
   soul.isBlueHeartActive = isBlue;
   soul.color = isBlue ? "blue" : "red";
 }
-setInterval(updateHeartType, 30000);
+setInterval(updateHeartType, 3000);
 updateHeartType();
 
 // Kemik ve ışın yaratma
-function spawnBone() {
-  // Kemikler
-  for (let i = 0; i < 10; i++) {
+function spawnBone(boneCount = 15) {
+  const verticalLasers = 3;   // Dikey ışın sayısı
+  const diagonalLasers = 2;   // Çapraz ışın sayısı
+
+  // Yanlardan gelen kemikler
+  for (let i = 0; i < boneCount; i++) {
     bones.push({
       x: Math.random() < 0.5 ? 0 : canvas.width - 10,
       y: Math.random() * canvas.height,
@@ -74,7 +77,8 @@ function spawnBone() {
     });
   }
 
-  for (let i = 0; i < 10; i++) {
+  // Yukarıdan gelen kemikler
+  for (let i = 0; i < boneCount; i++) {
     bones.push({
       x: Math.random() * (canvas.width - 10),
       y: canvas.height,
@@ -84,28 +88,33 @@ function spawnBone() {
     });
   }
 
-  // Dikey ışın
-  lasers.push({
-    x: Math.random() * (canvas.width - 10),
-    y: Math.random() * (canvas.height - 100) + 100,
-    width: 5,
-    height: 50,
-    speed: 5 + Math.random() * 5,
-    dx: 0,
-    dy: -1
-  });
+  // Dikey lazerler
+  for (let i = 0; i < verticalLasers; i++) {
+    lasers.push({
+      x: Math.random() * (canvas.width - 10),
+      y: Math.random() * (canvas.height - 100) + 100,
+      width: 5,
+      height: 50,
+      speed: 4 + Math.random() * 2,
+      dx: 0,
+      dy: -1
+    });
+  }
 
-  // Çapraz ışın (bonus)
-  lasers.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    width: 5,
-    height: 50,
-    speed: 4 + Math.random() * 7,
-    dx: Math.random() < 0.5 ? -1 : 1,
-    dy: -1
-  });
+  // Çapraz lazerler
+  for (let i = 0; i < diagonalLasers; i++) {
+    lasers.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      width: 5,
+      height: 50,
+      speed: 4 + Math.random() * 3,
+      dx: Math.random() < 0.5 ? -1 : 1,
+      dy: -1
+    });
+  }
 }
+
 
 // Ses efekti ekleme
 const boneSound = new Audio('bone-hit-sound.mp3');  // Kemik sesini burada ekle
@@ -143,7 +152,7 @@ setTimeout(() => {
 // Güncelleme
 function update() {
   if (soul.hp <= 0) {
-    alert("Until the end of your determination");
+    alert("You died... Try again?");
     location.reload();
   }
 
