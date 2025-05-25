@@ -8,7 +8,7 @@ const soul = {
   height: 20,
   color: "red",
   speed: 5,
-  hp: 100,
+  hp: 300,
   isBlueHeartActive: false,
   touchStartX: 0,
   touchStartY: 0,
